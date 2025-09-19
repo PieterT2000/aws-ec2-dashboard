@@ -11,6 +11,7 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch": "^3.886.0",
     "@aws-sdk/client-cost-explorer": "^3.888.0",
+    "@aws-sdk/client-cost-optimization-hub": "^3.893.0",
     "@aws-sdk/client-ec2": "^3.886.0",
     "@aws-sdk/client-sts": "^3.886.0",
     "@radix-ui/react-checkbox": "^1.3.3",

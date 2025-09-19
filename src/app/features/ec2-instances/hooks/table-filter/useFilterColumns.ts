@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
-import { useWithResourceWasteCalculation } from "../useWithResourceWasteCalculation";
+import { useWithResourceOptimisation } from "../useWithResourceOptimisation";
 import { createColumns } from "../../components/columns";
 
 export function useFilterColumns(
-  instances: ReturnType<typeof useWithResourceWasteCalculation>
+  instances: ReturnType<typeof useWithResourceOptimisation>
 ) {
   const getUniqueValues = useCallback(
     (column: "type" | "team" | "wasteScore") => {

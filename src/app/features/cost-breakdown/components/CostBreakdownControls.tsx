@@ -52,7 +52,7 @@ const CostBreakdownControls = ({
         <Select value={groupBy} onValueChange={onGroupByChange}>
           <SelectTrigger
             id="group-by"
-            className="w-[140px] capitalize bg-card border-none"
+            className="w-[160px] capitalize bg-card shadow-card-foreground border-0"
           >
             <SelectValue placeholder="Select grouping" />
           </SelectTrigger>
@@ -78,7 +78,7 @@ const CostBreakdownControls = ({
           >
             <SelectTrigger
               id="tag-select"
-              className="max-w-[200px] min-w-[160px] capitalize bg-card border-none"
+              className="max-w-[200px] min-w-[160px] capitalize bg-card border-0 shadow-card-foreground"
             >
               <SelectValue
                 placeholder={

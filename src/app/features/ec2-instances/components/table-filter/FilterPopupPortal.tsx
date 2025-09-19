@@ -112,7 +112,7 @@ const FilterPopupPortal = () => {
         }}
       >
         <Command>
-          <div className="flex items-center justify-between px-3 py-1 border-b">
+          <div className="flex items-center justify-between px-3 py-2.5 border-b">
             <div className="text-sm font-medium">
               {getColumnLabel(filterState.activeColumn)} Filter
             </div>

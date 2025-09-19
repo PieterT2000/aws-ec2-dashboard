@@ -9,6 +9,7 @@ import {
   MetricValue,
 } from "@aws-sdk/client-cost-explorer";
 import { GroupByDimension, TagKey, VALID_TAG_KEYS } from "./types";
+import { differenceInDays } from "date-fns";
 
 export async function getTotalCost({
   startDate,
@@ -36,6 +37,45 @@ export async function getTotalCost({
     return acc;
   }, 0);
   return totalCostOverPeriod;
+}
+
+export async function getDailyTimeseriesCost({
+  startDate,
+  endDate,
+}: {
+  startDate: string;
+  endDate: string;
+}) {
+  const params: GetCostAndUsageCommandInput = {
+    TimePeriod: { Start: startDate, End: endDate },
+    Granularity: "DAILY",
+    Metrics: ["UnblendedCost"],
+    GroupBy: [{ Type: "DIMENSION", Key: "RECORD_TYPE" }],
+  };
+  const command = new GetCostAndUsageCommand(params);
+  const response = await costExplorerClient.send(command);
+  const periodInDays = differenceInDays(new Date(endDate), new Date(startDate));
+  // return timeseries grouped by time
+  const timeseries = response.ResultsByTime?.map((result) => {
+    const usageGroup = result.Groups?.find((group) =>
+      group.Keys?.includes("Usage")
+    );
+    const costStr = usageGroup?.Metrics?.UnblendedCost?.Amount;
+    const cost = costStr ? parseFloat(costStr) : 0;
+    return {
+      time: result.TimePeriod?.Start,
+      cost,
+    };
+  });
+
+  const totalCost = timeseries?.reduce((acc, curr) => {
+    acc += curr.cost;
+    return acc;
+  }, 0);
+  return {
+    timeseries,
+    avgDailyCost: totalCost ? totalCost / (periodInDays || 1) : 0,
+  };
 }
 
 async function getEC2Costs(

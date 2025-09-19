@@ -148,6 +148,7 @@ const TotalCostPieChart = () => {
             ? error.message
             : "Unable to fetch cost breakdown data. Please try again."
         }
+        className="h-80"
       />
     );
   }

@@ -17,7 +17,7 @@ import { ec2InstancesQueryKeys } from "@/app/features/ec2-instances/hooks/querie
 import { costBreakdownQueryKeys } from "@/app/features/cost-breakdown/hooks/useCostBreakdownQueries";
 import { Alert, AlertDescription } from "../ui/alert";
 
-export default function Calendar23() {
+const DateRangeSelector = () => {
   const { dateRange, setDateRange } = useDateRange();
   const queryClient = useQueryClient();
 
@@ -113,4 +113,6 @@ export default function Calendar23() {
       </div>
     </div>
   );
-}
+};
+
+export default DateRangeSelector;

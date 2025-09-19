@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
-import { useWithResourceWasteCalculation } from "../useWithResourceWasteCalculation";
+import { useWithResourceOptimisation } from "../useWithResourceOptimisation";
 import { useEC2TableFilter } from "@/contexts/TableFilterContext";
 
 export function useFilteredInstances(
-  instances: ReturnType<typeof useWithResourceWasteCalculation>
+  instances: ReturnType<typeof useWithResourceOptimisation>
 ) {
   const { filterValues, clearAllFilters, hasActiveFilters } =
     useEC2TableFilter();

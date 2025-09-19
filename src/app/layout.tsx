@@ -9,13 +9,17 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const rootStyle = {
+  scrollBehavior: "smooth",
+} as const;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning style={rootStyle}>
       <body className={inter.className}>
         <QueryProvider>
           <ThemeProvider>

@@ -14,8 +14,22 @@ import {
 } from "@/components/ui/sidebar";
 import { Server, PieChart, LineChart } from "lucide-react";
 import { ThemePicker } from "./ThemePicker";
+import { useCostSavings } from "@/app/features/ec2-instances/hooks/queries/useCostSavings";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 
 export function NavSidebar() {
+  const { data } = useCostSavings();
+  const recommendationCount = data?.data?.recommendations?.length ?? 0;
   return (
     <SidebarRoot className="min-w-64 bg-white dark:bg-gray-900 pt-2">
       <SidebarContent className="space-y-6">
@@ -23,22 +37,35 @@ export function NavSidebar() {
           <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton>
+              <SidebarMenuButton onClick={() => scrollToSection("overview")}>
+                <LineChart className="h-5 w-5" />
+                Overview
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                onClick={() => scrollToSection("ec2-instances")}
+              >
                 <Server className="h-5 w-5" />
                 EC2 Instances
-                <SidebarMenuBadge className="bg-primary">4</SidebarMenuBadge>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <SidebarMenuBadge className="bg-primary">
+                      {recommendationCount}
+                    </SidebarMenuBadge>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {recommendationCount} recommendations
+                  </TooltipContent>
+                </Tooltip>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton>
+              <SidebarMenuButton
+                onClick={() => scrollToSection("cost-breakdown")}
+              >
                 <PieChart className="h-5 w-5" />
                 Cost Breakdown
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <LineChart className="h-5 w-5" />
-                Cost Projection
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

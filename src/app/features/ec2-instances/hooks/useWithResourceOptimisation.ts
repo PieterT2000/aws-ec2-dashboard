@@ -1,9 +1,9 @@
 import { EC2InstanceTabularData } from "@/lib/services/ec2";
+import { useCostSavings } from "./queries/useCostSavings";
 
 const WEIGHTED_UTILIZATION_RATIOS = {
-  cpu: 0.5,
-  memory: 0.4,
-  disk: 0.1,
+  cpu: 0.7,
+  memory: 0.3,
 };
 
 function calculateResourceBasedWaste(
@@ -11,19 +11,13 @@ function calculateResourceBasedWaste(
 ): number {
   const metrics = instance.metrics;
 
-  if (
-    !metrics ||
-    !metrics.cpuUsagePercent ||
-    !metrics.memoryUsagePercent ||
-    !metrics.diskUsagePercent
-  )
+  if (!metrics || !metrics.cpuUsagePercent || !metrics.memoryUsagePercent)
     return 0;
 
   // Computed weighted utilization
   const weightedUtilization =
     metrics.cpuUsagePercent * WEIGHTED_UTILIZATION_RATIOS.cpu +
-    metrics.memoryUsagePercent * WEIGHTED_UTILIZATION_RATIOS.memory +
-    metrics.diskUsagePercent * WEIGHTED_UTILIZATION_RATIOS.disk;
+    metrics.memoryUsagePercent * WEIGHTED_UTILIZATION_RATIOS.memory;
 
   // clamp the waste between 0 and 100
   const waste = Math.max(0, Math.min(100, 100 - weightedUtilization));
@@ -31,9 +25,14 @@ function calculateResourceBasedWaste(
   return waste;
 }
 
-export function useWithResourceWasteCalculation(data: EC2InstanceTabularData) {
+export function useWithResourceOptimisation(data: EC2InstanceTabularData) {
+  const { data: costSavings } = useCostSavings();
+  const costSavingsData = costSavings?.data?.recommendations || [];
   return data.map((instance) => ({
     ...instance,
     wasteScore: calculateResourceBasedWaste(instance),
+    costSavings: costSavingsData.find(
+      (costSaving) => costSaving.resourceId === instance.id
+    ),
   }));
 }

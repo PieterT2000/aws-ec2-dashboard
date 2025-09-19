@@ -76,9 +76,12 @@ export async function GET(request: Request) {
       tag
     );
 
+    const startDateStr = startDate.split("T")[0];
+    const endDateStr = endDate.split("T")[0];
+
     const totalCost = await getTotalCost({
-      startDate: startDate.split("T")[0],
-      endDate: endDate.split("T")[0],
+      startDate: startDateStr,
+      endDate: endDateStr,
     });
 
     return NextResponse.json({

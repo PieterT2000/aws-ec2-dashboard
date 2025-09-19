@@ -1,8 +1,7 @@
 "use client";
 
 import { DataTable } from "./data-table";
-import { useEC2Instances } from "../hooks/queries/useEC2Instances";
-import { useWithResourceWasteCalculation } from "../hooks/useWithResourceWasteCalculation";
+import { useWithResourceOptimisation } from "../hooks/useWithResourceOptimisation";
 import { useDateRange } from "@/contexts/DateRangeContext";
 import { ErrorState } from "@/components/ui/error-state";
 import TableSkeleton from "./TableSkeleton";
@@ -10,10 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Filter, Search } from "lucide-react";
 import { useFilteredInstances } from "../hooks/table-filter/useFilteredInstances";
-import { useMemo } from "react";
-import { createColumns } from "./columns";
 import { useFilterColumns } from "../hooks/table-filter/useFilterColumns";
 import FilterPopupPortal from "./table-filter/FilterPopupPortal";
+import { useEC2Instances } from "../hooks/queries/useEC2Instances";
 
 function EC2InstancesDataTable() {
   const { dateRange } = useDateRange();
@@ -21,7 +19,7 @@ function EC2InstancesDataTable() {
     dateRange,
   });
   const instances = data?.data || [];
-  const instancesWithWaste = useWithResourceWasteCalculation(instances);
+  const instancesWithWaste = useWithResourceOptimisation(instances);
 
   const {
     filteredInstances,
@@ -77,7 +75,7 @@ function EC2InstancesDataTable() {
               Clear All Filters
             </Button>
           )}
-          <div className="relative w-[400px]">
+          <div className="relative w-[217px]">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search instances..."
