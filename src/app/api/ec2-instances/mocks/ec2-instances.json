@@ -1,0 +1,93 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "i-0f9246c0b8702dad1",
+      "state": "running",
+      "type": "m7i-flex.large",
+      "launchTime": "2025-09-12T20:24:29.000Z",
+      "region": "eu-west-2c",
+      "name": "m7i-flex_large_2cpu_8ram",
+      "tags": {
+        "Name": "m7i-flex_large_2cpu_8ram",
+        "Team": "Bioinformatics"
+      },
+      "uptime": 67982774,
+      "metrics": {
+        "cpuUsagePercent": 43.6383403973532511,
+        "memoryUsagePercent": 23.3717550315523135,
+        "diskUsagePercent": 29.816051022274728
+      },
+      "costStats": {
+        "totalCost": 2.5350267405,
+        "avgCost": 0.61
+      }
+    },
+    {
+      "id": "i-04e5dbc1990e5de6e",
+      "state": "running",
+      "type": "t2.xlarge",
+      "launchTime": "2025-09-12T20:24:29.000Z",
+      "region": "eu-west-2b",
+      "name": "t2_large_4cpu_16ram",
+      "tags": {
+        "Name": "t2_large_4cpu_16ram",
+        "Team": "Genomics"
+      },
+      "uptime": 67982774,
+      "metrics": {
+        "cpuUsagePercent": 0.30000000000003035,
+        "memoryUsagePercent": 1.6478281400659047,
+        "diskUsagePercent": 11.839979896525943
+      },
+      "costStats": {
+        "totalCost": 0,
+        "avgCost": 0.76
+      }
+    },
+    {
+      "id": "i-08c34cb33881eae01",
+      "state": "running",
+      "type": "t2.medium",
+      "launchTime": "2025-09-12T20:24:29.000Z",
+      "region": "eu-west-2b",
+      "name": "t2_medium_2cpu_4ram",
+      "tags": {
+        "Name": "t2_medium_2cpu_4ram",
+        "Team": "Molecular-Biology"
+      },
+      "uptime": 67982774,
+      "metrics": {
+        "cpuUsagePercent": 3.5753568450892113,
+        "memoryUsagePercent": 6.153678713536128,
+        "diskUsagePercent": 8.398423026694946
+      },
+      "costStats": {
+        "totalCost": 0,
+        "avgCost": 0.56
+      }
+    },
+    {
+      "id": "i-0dd63e295ecdaf63f",
+      "state": "running",
+      "type": "t2.small",
+      "launchTime": "2025-09-12T21:07:56.000Z",
+      "region": "eu-west-2b",
+      "name": "t2_small_1cpu_2ram",
+      "tags": {
+        "Name": "t2_small_1cpu_2ram",
+        "Team": "Quality-Assurance"
+      },
+      "uptime": 65375774,
+      "metrics": {
+        "cpuUsagePercent": 55,
+        "memoryUsagePercent": 63.27098483522429,
+        "diskUsagePercent": 26.40870067334722
+      },
+      "costStats": {
+        "totalCost": 0,
+        "avgCost": 0.23
+      }
+    }
+  ]
+}
